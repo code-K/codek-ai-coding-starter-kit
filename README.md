@@ -2,7 +2,7 @@
 
 > Build production-ready web apps faster with AI-powered Skills handling Requirements, Architecture, Development, QA, and Deployment.
 
-This template uses [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with modern Skills, Rules, and Sub-Agents to provide a complete AI-powered development workflow.
+This template uses AI Coding Agents with modern Skills, Rules, and Sub-Agents to provide a complete AI-powered development workflow.
 
 ## Quick Start
 
@@ -35,7 +35,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### 4. Initialize Your Project
 
-Open Claude Code and describe your project. The `/requirements` skill automatically detects that this is a fresh project and enters **Init Mode**:
+Open your AI Coding Agent and describe your project. The `/requirements` skill automatically detects that this is a fresh project and enters **Init Mode**:
 
 ```
 /requirements I want to build a project management tool for small teams
@@ -80,26 +80,28 @@ To add more features later, run `/requirements` again - it detects the existing 
 | Backend Developer | `/backend` | Builds APIs, database schemas, RLS policies with Supabase |
 | QA Engineer | `/qa` | Tests features against acceptance criteria + security audit |
 | DevOps | `/deploy` | Deploys to Vercel with production-ready checks |
+| Distribution Engineer | `/distribute` | Distributes project to the users/customers via socials, forums, targeted ads, etc. |
 | Help | `/help` | Context-aware guide: shows where you are and what to do next |
 
 ### How Skills Work
 
-- **Skills** are defined in `.claude/skills/` and auto-discovered by Claude Code
-- **Rules** in `.claude/rules/` are auto-applied based on file context (no manual loading)
+- **Skills** are defined in `.agents/skills/` and auto-discovered by the agent
+- **Rules** in `.agents/rules/` are auto-applied based on file context (no manual loading)
 - **Sub-Agents** run heavy tasks (frontend, backend, QA) in isolated contexts for cost efficiency
-- **CLAUDE.md** provides project context automatically at every session start
+- **AGENTS.md** provides project context automatically at every session start
 
 ---
 
 ## Development Workflow
 
 ```
-1. Define    /requirements  -->  Feature spec in features/PROJ-X.md
-2. Design    /architecture  -->  Tech design added to feature spec
-3. Build     /frontend      -->  UI components implemented
-             /backend       -->  APIs + database (if needed)
-4. Test      /qa            -->  Test results added to feature spec
-5. Ship      /deploy        -->  Deployed to Vercel
+1. Define       /requirements  -->  Feature spec in features/PROJ-X.md
+2. Design       /architecture  -->  Tech design added to feature spec
+3. Build        /frontend      -->  UI components implemented
+                /backend       -->  APIs + database (if needed)
+4. Test         /qa            -->  Test results added to feature spec
+5. Ship         /deploy        -->  Deployed to Vercel
+6. Distribute   /distribute    -->  Distribute project to the users/customers
 ```
 
 ### Feature Tracking
@@ -125,6 +127,7 @@ Every skill reads this file at start and updates it when done, preventing duplic
 | **UI Library** | shadcn/ui | Copy-paste, customizable components |
 | **Backend** | Supabase (optional) | PostgreSQL + Auth + Storage + Realtime |
 | **Deployment** | Vercel | Zero-config Next.js hosting |
+| **Distribution** | Socials, forums, ads, etc. | Distribute project to the users/customers |
 | **Validation** | Zod | Runtime type validation |
 
 ---
@@ -133,8 +136,8 @@ Every skill reads this file at start and updates it when done, preventing duplic
 
 ```
 ai-coding-starter-kit/
-+-- CLAUDE.md                        <-- Auto-loaded project context
-+-- .claude/
++-- AGENTS.md                        <-- Auto-loaded project context
++-- .agents/
 |   +-- settings.json                <-- Team permissions (committed)
 |   +-- settings.local.json          <-- Personal overrides (gitignored)
 |   +-- rules/                       <-- Auto-applied coding rules
@@ -149,6 +152,7 @@ ai-coding-starter-kit/
 |   |   +-- backend/SKILL.md             /backend (runs as sub-agent)
 |   |   +-- qa/SKILL.md                  /qa (runs as sub-agent)
 |   |   +-- deploy/SKILL.md              /deploy
+|   |   +-- distribute/SKILL.md          /distribute
 |   |   +-- help/SKILL.md                /help
 |   +-- agents/                      <-- Sub-agent configs
 |       +-- frontend-dev.md              Model, tools, limits
@@ -214,8 +218,8 @@ See `docs/production/` for detailed setup guides.
 
 ## How It Works Under the Hood
 
-### Skills (`.claude/skills/`)
-Each skill is a structured workflow that Claude Code discovers automatically. Skills can run inline (in the main conversation) or as forked sub-agents (isolated context window).
+### Skills (`.agents/skills/`)
+Each skill is a structured workflow that the Agent discovers automatically. Skills can run inline (in the main conversation) or as forked sub-agents (isolated context window).
 
 | Skill | Execution | Why? |
 |-------|-----------|------|
@@ -225,15 +229,16 @@ Each skill is a structured workflow that Claude Code discovers automatically. Sk
 | `/backend` | Sub-agent (forked) | Heavy file editing, SQL, API code |
 | `/qa` | Sub-agent (forked) | Systematic testing, lots of output |
 | `/deploy` | Inline | Deployment needs user oversight |
+| `/distribute` | Inline | Distribution needs user oversight |
 | `/help` | Inline | Quick status check and guidance |
 
-### Rules (`.claude/rules/`)
-Coding standards that are auto-applied based on which files Claude is working with. No manual loading needed.
+### Rules (`.agents/rules/`)
+Coding standards that are auto-applied based on which files Agents are working with. No manual loading needed.
 
-### Sub-Agent Configs (`.claude/agents/`)
+### Sub-Agent Configs (`.agents/agents/`)
 Lightweight configurations that define model, tool access, and turn limits for forked skills.
 
-### CLAUDE.md
+### AGENTS.md
 Auto-loaded at every session start. Contains tech stack, conventions, and references to PRD and feature index.
 
 ---
@@ -252,11 +257,12 @@ Not everything is loaded at once. Information is layered by relevance:
 
 | Layer | What | When loaded |
 |-------|------|-------------|
-| `CLAUDE.md` | Tech stack, conventions, commands | Every session (auto) |
-| `.claude/rules/` | Coding standards | When editing matching files (auto) |
+| `AGENTS.md` | Tech stack, conventions, commands | Every session (auto) |
+| `.agents/rules/` | Coding standards | When editing matching files (auto) |
 | Skill `SKILL.md` | Workflow instructions | When skill is invoked |
 | Feature spec | Requirements, AC, tech design | On demand (skill reads it) |
 | `docs/production/` | Deployment guides | Only when referenced |
+| `docs/distribution/` | Distribution guides | Only when referenced |
 
 ### Context is isolated
 
@@ -276,11 +282,11 @@ A global rule (`rules/general.md`) enforces: always read a file before modifying
 
 This template is designed as a starting point. Customize it for your team:
 
-1. **Edit CLAUDE.md** - Add your project-specific conventions and build commands
+1. **Edit AGENTS.md** - Add your project-specific conventions and build commands
 2. **Edit docs/PRD.md** - Define your product vision and roadmap
-3. **Edit .claude/rules/** - Adjust coding standards for your team
-4. **Edit .claude/skills/** - Modify workflows to match your process
-5. **Edit .claude/settings.json** - Configure team permissions
+3. **Edit .agents/rules/** - Adjust coding standards for your team
+4. **Edit .agents/skills/** - Modify workflows to match your process
+5. **Edit .agents/settings.json** - Configure team permissions
 
 ---
 
@@ -298,6 +304,19 @@ Standalone guides in `docs/production/`:
 
 ---
 
+## Distribution Guides
+
+Standalone guides in `docs/distribution/`:
+
+| Guide | Setup Time | What It Does |
+|-------|-----------|-------------|
+| [Socials](docs/distribution/socials.md) | 5 min | Social media distribution |
+| [Forums](docs/distribution/forums.md) | 2 min | Forum distribution |
+| [Ads](docs/distribution/ads.md) | 10 min | Ad distribution |
+| [Other](docs/distribution/other.md) | 15 min | Other distribution methods |
+
+---
+
 ## Scripts
 
 ```bash
@@ -311,7 +330,14 @@ npm run lint       # ESLint
 
 ## Author
 
-Created by **Alex Sprogis** – AI Product Engineer & Content Creator.
+Enhanced/Updated by **Christian Koch** - Senior Fullstack CRM Developer, DevOps & AI Automation Expert
+
+- [Website](https://devs.berlin)
+- [LinkedIn](https://www.linkedin.com/in/code-k/)
+- [GitHub](https://github.com/code-K)
+- [X](https://x.com/cod3_K)
+
+Based on the initial work by **Alex Sprogis** – AI Product Engineer & Content Creator.
 
 - [YouTube](https://www.youtube.com/@alex.sprogis)
 - [Website](https://alexsprogis.de)

@@ -31,9 +31,12 @@ yarn-error.log*
 # vercel
 .vercel
 
-# claude code personal settings
-.claude/settings.local.json
+# ai agent personal settings
+.agents/settings.local.json
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# mcps
+.mcp.json
