@@ -5,7 +5,7 @@ argument-hint: [feature-spec-path]
 user-invocable: true
 context: fork
 agent: Frontend Developer
-model: opus
+model: kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
 ---
 
 # Frontend Developer

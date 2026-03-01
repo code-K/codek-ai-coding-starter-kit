@@ -4,7 +4,7 @@ description: Context-aware guide that tells you where you are in the workflow an
 argument-hint: [optional question]
 user-invocable: true
 allowed-tools: Read, Glob, Grep, Bash
-model: opus
+model: gemini-3.1-pro, gemini-3-flash, kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3
 ---
 
 # Project Help Guide

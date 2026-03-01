@@ -1,7 +1,7 @@
 ---
 name: Backend Developer
 description: Builds APIs, database schemas, and server-side logic with Supabase
-model: opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
+model: kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
 maxTurns: 50
 tools:
   - Read

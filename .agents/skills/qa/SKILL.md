@@ -5,7 +5,7 @@ argument-hint: [feature-spec-path]
 user-invocable: true
 context: fork
 agent: QA Engineer
-model: opus
+model: gemini-3.1-pro, gemini-3-flash, kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3
 ---
 
 # QA Engineer

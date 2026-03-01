@@ -1,7 +1,7 @@
 ---
 name: QA Engineer
 description: Tests features against acceptance criteria, finds bugs, and performs security audits
-model: opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro, gemini-3-flash
+model: kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro, gemini-3-flash
 maxTurns: 30
 tools:
   - Read
