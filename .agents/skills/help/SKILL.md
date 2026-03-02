@@ -27,6 +27,7 @@ Read these files to understand where the project stands:
 
 3. **Check Feature Specs:** For each feature in INDEX.md, check if:
    - Tech Design section exists (added by /architecture)
+   - Design Spec section exists (added by /design)
    - QA Test Results section exists (added by /qa)
    - Deployment section exists (added by /deploy)
 
@@ -52,8 +53,12 @@ Based on the state analysis, determine what the user should do next:
 > Feature PROJ-X is ready for architecture design.
 > Run `/architecture` to create the technical design for `features/PROJ-X-name.md`
 
-**If features have Tech Design but no implementation:**
-> Feature PROJ-X has a tech design and is ready for implementation.
+**If features have Tech Design but no Design Spec:**
+> Feature PROJ-X has architecture ready and needs UI/UX design.
+> Run `/design` to create the design specification for `features/PROJ-X-name.md`
+
+**If features have Tech Design + Design Spec but no implementation:**
+> Feature PROJ-X has architecture and design ready for implementation.
 > Run `/frontend` to build the UI for `features/PROJ-X-name.md`
 > (If backend is needed, run `/backend` after frontend is done)
 
@@ -74,7 +79,7 @@ Based on the state analysis, determine what the user should do next:
 
 If the user asked a specific question (via arguments), answer it in the context of the current project state. Common questions:
 
-- "What skills are available?" → List all 7 skills with brief descriptions
+- "What skills are available?" → List all 9 skills with brief descriptions
 - "How do I add a new feature?" → Explain `/requirements` workflow
 - "How do I customize this template?" → Point to CLAUDE.md, rules/, skills/
 - "What's the project structure?" → Explain the directory layout

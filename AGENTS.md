@@ -1,6 +1,6 @@
 # AI Coding Starter Kit
 
-> A Next.js template with an AI-powered development workflow using specialized skills for Requirements, Architecture, Frontend, Backend, QA, and Deployment.
+> A Next.js template with an AI-powered development workflow using specialized skills for Requirements, Architecture, Design, Frontend, Backend, QA, Deployment, and Distribution.
 
 ## Read Order (Mandatory)
 
@@ -40,10 +40,12 @@ docs/
 
 1. `/requirements` - Create feature spec from idea
 2. `/architecture` - Design tech architecture (PM-friendly, no code)
-3. `/frontend` - Build UI components (shadcn/ui first)
-4. `/backend` - Build APIs, database, RLS policies
-5. `/qa` - Test against acceptance criteria + security audit
-6. `/deploy` - Deploy to Vercel + production-ready checks
+3. `/design` - Create UI/UX design specification (business-aware, implementation-ready)
+4. `/frontend` - Build UI components by following the approved design spec (shadcn/ui first)
+5. `/backend` - Build APIs, database, RLS policies
+6. `/qa` - Test against acceptance criteria + security audit + design conformance
+7. `/deploy` - Deploy to Vercel + production-ready checks
+8. `/distribute` - Drive adoption via distribution channels and feedback loops
 
 ## Feature Tracking
 
