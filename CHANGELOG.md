@@ -10,6 +10,13 @@ All notable changes to this repository should be documented in this file.
 
 ## [2026-03-02]
 
+### Added
+- Added Distribution Engineer agent role in [`.agents/agents/distribution-engineer.md`](.agents/agents/distribution-engineer.md).
+- Added distribution workflow skill in [`.agents/skills/distribute/SKILL.md`](.agents/skills/distribute/SKILL.md).
+
+### Changed
+- Updated [`.agents/skills/help/SKILL.md`](.agents/skills/help/SKILL.md) to reflect 7 available skills in help responses.
+
 ### Docs
 - Added repository onboarding guide for coding agents in [`.github/copilot-instructions.md`](.github/copilot-instructions.md).
 - Enhanced [`AGENTS.md`](AGENTS.md) to require reading copilot instructions first and to align validation/changelog policies.

@@ -74,7 +74,7 @@ Based on the state analysis, determine what the user should do next:
 
 If the user asked a specific question (via arguments), answer it in the context of the current project state. Common questions:
 
-- "What skills are available?" → List all 6 skills with brief descriptions
+- "What skills are available?" → List all 7 skills with brief descriptions
 - "How do I add a new feature?" → Explain `/requirements` workflow
 - "How do I customize this template?" → Point to CLAUDE.md, rules/, skills/
 - "What's the project structure?" → Explain the directory layout
