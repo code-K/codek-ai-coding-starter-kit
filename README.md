@@ -58,9 +58,10 @@ After project initialization, build features one at a time using skills:
 
 ```
 /architecture    Design the tech approach for features/PROJ-1-user-auth.md
-/frontend        Build the UI for features/PROJ-1-user-auth.md
+/design          Create UI/UX design spec for features/PROJ-1-user-auth.md
+/frontend        Build the UI for features/PROJ-1-user-auth.md (following the design spec)
 /backend         Build the API for features/PROJ-1-user-auth.md
-/qa              Test features/PROJ-1-user-auth.md
+/qa              Test features/PROJ-1-user-auth.md (including design conformance)
 /deploy          Deploy to Vercel
 ```
 
@@ -76,9 +77,10 @@ To add more features later, run `/requirements` again - it detects the existing 
 |-------|---------|-------------|
 | Requirements Engineer | `/requirements` | Creates feature specs with user stories, acceptance criteria, edge cases |
 | Solution Architect | `/architecture` | Designs PM-friendly tech architecture (no code, only high-level design) |
+| UI/UX Designer Specialist | `/design` | Creates conversion-focused, implementation-ready UI/UX design specs aligned with Tailwind and shadcn/ui |
 | Frontend Developer | `/frontend` | Builds UI with React, Tailwind CSS, and shadcn/ui |
 | Backend Developer | `/backend` | Builds APIs, database schemas, RLS policies with Supabase |
-| QA Engineer | `/qa` | Tests features against acceptance criteria + security audit |
+| QA Engineer | `/qa` | Tests features against acceptance criteria + security audit + design conformance |
 | DevOps | `/deploy` | Deploys to Vercel with production-ready checks |
 | Distribution Engineer | `/distribute` | Distributes project to the users/customers via socials, forums, targeted ads, etc. |
 | Help | `/help` | Context-aware guide: shows where you are and what to do next |
@@ -96,12 +98,13 @@ To add more features later, run `/requirements` again - it detects the existing 
 
 ```
 1. Define       /requirements  -->  Feature spec in features/PROJ-X.md
-2. Design       /architecture  -->  Tech design added to feature spec
-3. Build        /frontend      -->  UI components implemented
+2. Architect    /architecture  -->  Tech design added to feature spec
+3. Design       /design        -->  UI/UX design spec added to feature spec
+4. Build        /frontend      -->  UI components implemented from approved design
                 /backend       -->  APIs + database (if needed)
-4. Test         /qa            -->  Test results added to feature spec
-5. Ship         /deploy        -->  Deployed to Vercel
-6. Distribute   /distribute    -->  Distribute project to the users/customers
+5. Test         /qa            -->  Test results + design conformance added to feature spec
+6. Ship         /deploy        -->  Deployed to Vercel
+7. Distribute   /distribute    -->  Distribute project to the users/customers
 ```
 
 ### Feature Tracking
@@ -146,15 +149,17 @@ ai-coding-starter-kit/
 |   |   +-- backend.md                   RLS, validation, queries
 |   |   +-- security.md                  Secrets, headers, auth
 |   +-- skills/                      <-- Invocable workflows (/command)
-|   |   +-- requirements/SKILL.md        /requirements
-|   |   +-- architecture/SKILL.md        /architecture
-|   |   +-- frontend/SKILL.md            /frontend (runs as sub-agent)
-|   |   +-- backend/SKILL.md             /backend (runs as sub-agent)
-|   |   +-- qa/SKILL.md                  /qa (runs as sub-agent)
-|   |   +-- deploy/SKILL.md              /deploy
-|   |   +-- distribute/SKILL.md          /distribute
-|   |   +-- help/SKILL.md                /help
+|   |   |   +-- requirements/SKILL.md        /requirements
+|   |   |   +-- architecture/SKILL.md        /architecture
+|   |   |   +-- design/SKILL.md              /design
+|   |   |   +-- frontend/SKILL.md            /frontend (runs as sub-agent)
+|   |   |   +-- backend/SKILL.md             /backend (runs as sub-agent)
+|   |   |   +-- qa/SKILL.md                  /qa (runs as sub-agent)
+|   |   |   +-- deploy/SKILL.md              /deploy
+|   |   |   +-- distribute/SKILL.md          /distribute
+|   |   |   +-- help/SKILL.md                /help
 |   +-- agents/                      <-- Sub-agent configs
+|       +-- ui-ux-designer.md            UI/UX Specialist model, tools, limits
 |       +-- frontend-dev.md              Model, tools, limits
 |       +-- backend-dev.md
 |       +-- qa-engineer.md
@@ -225,6 +230,7 @@ Each skill is a structured workflow that the Agent discovers automatically. Skil
 |-------|-----------|------|
 | `/requirements` | Inline | Needs live interaction with user |
 | `/architecture` | Inline | Short output, user reviews in real-time |
+| `/design` | Sub-agent (forked) | Produces detailed design specs with focused UX context |
 | `/frontend` | Sub-agent (forked) | Heavy file editing, lots of output |
 | `/backend` | Sub-agent (forked) | Heavy file editing, SQL, API code |
 | `/qa` | Sub-agent (forked) | Systematic testing, lots of output |

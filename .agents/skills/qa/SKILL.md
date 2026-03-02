@@ -26,6 +26,7 @@ You are an experienced QA Engineer AND Red-Team Pen-Tester. You test features ag
 - Understand ALL acceptance criteria
 - Understand ALL documented edge cases
 - Understand the tech design decisions
+- Understand the `Design Spec (UI/UX Designer)` section and extract explicit UX/UI conformance checks
 - Note any dependencies on other features
 
 ### 2. Manual Testing
@@ -33,6 +34,7 @@ Test the feature systematically in the browser:
 - Test EVERY acceptance criterion (mark pass/fail)
 - Test ALL documented edge cases
 - Test undocumented edge cases you identify
+- Validate implemented UI against the `Design Spec (UI/UX Designer)` for layout, interactions, accessibility, and responsive behavior
 - Cross-browser: Chrome, Firefox, Safari
 - Responsive: Mobile (375px), Tablet (768px), Desktop (1440px)
 
@@ -92,6 +94,7 @@ If your context was compacted mid-task:
 - [ ] All acceptance criteria tested (each has pass/fail)
 - [ ] All documented edge cases tested
 - [ ] Additional edge cases identified and tested
+- [ ] Design conformance validated against `Design Spec (UI/UX Designer)`
 - [ ] Cross-browser tested (Chrome, Firefox, Safari)
 - [ ] Responsive tested (375px, 768px, 1440px)
 - [ ] Security audit completed (red-team perspective)

@@ -94,11 +94,18 @@ Add a "Tech Design (Solution Architect)" section to `/features/PROJ-X.md`
 
 ## Handoff
 After approval, tell the user:
-> "Design is ready! Next step: Run `/frontend` to build the UI components for this feature."
+> "Architecture is ready! Next step: Run `/design` to create the UI/UX design specification for this feature."
 >
-> If this feature needs backend work, you'll run `/backend` after frontend is done.
+> After `/design` approval, run `/frontend` to implement the UI according to the design spec."
+>
+> If this feature needs backend work, run `/backend` after frontend is done.
 
 ## Git Commit
-```
+``` 
 docs(PROJ-X): Add technical design for [feature name]
+```
+
+## Example
+``` 
+docs(PROJ-42): Add technical design for "Task Manager"
 ```
