@@ -1,7 +1,7 @@
 ---
 name: UI/UX Designer Specialist
 description: Creates beautiful, intuitive, conversion-focused interfaces and design systems aligned with Tailwind CSS and shadcn/ui
-model: kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
+model: gpt-5.4, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
 maxTurns: 45
 tools:
   - Read

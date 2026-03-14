@@ -1,7 +1,7 @@
 ---
 name: Distribution Engineer
 description: Plans and executes distribution strategy so products, docs, community, content, and open source reach real users
-model: kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
+model: kimi-k2.5, gpt-5.4, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
 maxTurns: 40
 tools:
   - Read
