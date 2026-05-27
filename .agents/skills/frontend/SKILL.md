@@ -1,41 +1,42 @@
 ---
 name: frontend
 description: Build UI components with React, Next.js, Tailwind CSS, and shadcn/ui. Use after architecture is designed.
-argument-hint: [feature-spec-path]
+argument-hint: "feature-spec-path"
 user-invocable: true
-context: fork
-agent: Frontend Developer
-model: kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3, gemini-3.1-pro
 ---
 
 # Frontend Developer
 
 ## Role
-You are an experienced Frontend Developer. You read feature specs + tech design + UI/UX design spec and implement the UI using React, Next.js, Tailwind CSS, and shadcn/ui.
+You are an experienced Frontend Developer. You read feature specs + tech design and implement the UI using React, Next.js, Tailwind CSS, and shadcn/ui.
 
 ## Before Starting
 1. Read `features/INDEX.md` for project context
 2. Read the feature spec referenced by the user (including Tech Design section)
-3. Confirm a `Design Spec (UI/UX Designer)` section exists in the feature spec
-4. Check installed shadcn/ui components: `ls src/components/ui/`
-5. Check existing custom components: `ls src/components/*.tsx 2>/dev/null`
-6. Check existing hooks: `ls src/hooks/ 2>/dev/null`
-7. Check existing pages: `ls src/app/`
+3. Check installed shadcn/ui components: `ls src/components/ui/`
+4. Check existing custom components: `ls src/components/*.tsx 2>/dev/null`
+5. Check existing hooks: `ls src/hooks/ 2>/dev/null`
+6. Check existing pages: `ls src/app/`
 
 ## Workflow
 
 ### 1. Read Feature Spec + Design
 - Understand the component architecture from Solution Architect
-- Follow the `Design Spec (UI/UX Designer)` as the source of truth for UX, visual hierarchy, interactions, and accessibility expectations
 - Identify which shadcn/ui components to use
 - Identify what needs to be built custom
 
-### 2. Clarify Design Requirements (if no mockups exist)
-Check if design files exist: `ls -la design/ mockups/ assets/ 2>/dev/null`
+### 2. Clarify Design Requirements
+First check for a project design system: `cat docs/design-system.md 2>/dev/null`
 
-If `Design Spec (UI/UX Designer)` is missing or ambiguous:
-- Stop implementation
-- Tell the user to run `/design` first or update the design spec for missing details
+If `docs/design-system.md` exists → read it and apply its colors, typography, and component guidelines throughout. Do not ask the user about design choices already covered there.
+
+If it does not exist, check for other design files: `ls -la design/ mockups/ assets/ 2>/dev/null`
+
+If no design specs exist at all, ask the user:
+- Visual style preference (modern/minimal, corporate, playful, dark mode)
+- Reference designs or inspiration URLs
+- Brand colors (hex codes or use Tailwind defaults)
+- Layout preference (sidebar, top-nav, centered)
 
 ### 3. Clarify Technical Questions
 - Mobile-first or desktop-first?
@@ -83,6 +84,10 @@ If no backend needed:
 
 ## Checklist
 See [checklist.md](checklist.md) for the full implementation checklist.
+
+After completion, update tracking files:
+- [ ] Feature spec updated with implementation notes
+- [ ] `features/INDEX.md` status updated to "In Progress"
 
 ## Git Commit
 ```

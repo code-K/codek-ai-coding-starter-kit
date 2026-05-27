@@ -1,10 +1,8 @@
 ---
 name: help
 description: Context-aware guide that tells you where you are in the workflow and what to do next. Use anytime you're unsure.
-argument-hint: [optional question]
+argument-hint: "optional question"
 user-invocable: true
-allowed-tools: Read, Glob, Grep, Bash
-model: gemini-3.1-pro, gemini-3-flash, kimi-k2.5, opus-4.6, sonnet-4.6, codex-gpt-5.3
 ---
 
 # Project Help Guide
@@ -27,7 +25,6 @@ Read these files to understand where the project stands:
 
 3. **Check Feature Specs:** For each feature in INDEX.md, check if:
    - Tech Design section exists (added by /architecture)
-   - Design Spec section exists (added by /design)
    - QA Test Results section exists (added by /qa)
    - Deployment section exists (added by /deploy)
 
@@ -42,23 +39,19 @@ Based on the state analysis, determine what the user should do next:
 
 **If PRD is empty template:**
 > Your project hasn't been initialized yet.
-> Run `/requirements` with a description of what you want to build.
-> Example: `/requirements I want to build a task management app for small teams`
+> Run `/init` with a description of what you want to build.
+> Example: `/init I want to build a task management app for small teams`
 
 **If PRD exists but no features:**
 > Your PRD is set up but no features have been created yet.
-> Run `/requirements` to create your first feature specification.
+> Run `/write-spec` to create your first feature specification.
 
 **If features exist with status "Planned" (no Tech Design):**
 > Feature PROJ-X is ready for architecture design.
 > Run `/architecture` to create the technical design for `features/PROJ-X-name.md`
 
-**If features have Tech Design but no Design Spec:**
-> Feature PROJ-X has architecture ready and needs UI/UX design.
-> Run `/design` to create the design specification for `features/PROJ-X-name.md`
-
-**If features have Tech Design + Design Spec but no implementation:**
-> Feature PROJ-X has architecture and design ready for implementation.
+**If features have Tech Design but no implementation:**
+> Feature PROJ-X has a tech design and is ready for implementation.
 > Run `/frontend` to build the UI for `features/PROJ-X-name.md`
 > (If backend is needed, run `/backend` after frontend is done)
 
@@ -72,15 +65,15 @@ Based on the state analysis, determine what the user should do next:
 
 **If all features are deployed:**
 > All current features are deployed! You can:
-> - Run `/requirements` to add a new feature
+> - Run `/write-spec` to spec out a new feature
 > - Check `docs/PRD.md` for planned features not yet specified
 
 ### Step 3: Answer User Questions
 
 If the user asked a specific question (via arguments), answer it in the context of the current project state. Common questions:
 
-- "What skills are available?" → List all 9 skills with brief descriptions
-- "How do I add a new feature?" → Explain `/requirements` workflow
+- "What skills are available?" → List all available skills with brief descriptions
+- "How do I add a new feature?" → Explain `/write-spec` workflow (or `/init` if the project isn't set up yet)
 - "How do I customize this template?" → Point to CLAUDE.md, rules/, skills/
 - "What's the project structure?" → Explain the directory layout
 - "How do I deploy?" → Explain `/deploy` workflow and prerequisites

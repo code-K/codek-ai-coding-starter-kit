@@ -12,6 +12,7 @@ This template uses AI Coding Agents with modern Skills, Rules, and Sub-Agents to
 git clone https://github.com/YOUR_USERNAME/ai-coding-starter-kit.git my-project
 cd my-project
 npm install
+npx playwright install chromium   # one-time: installs browser for E2E tests (~300MB)
 ```
 
 ### 2. (Optional) Supabase Setup
@@ -35,39 +36,40 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### 4. Initialize Your Project
 
-Open your AI Coding Agent and describe your project. The `/requirements` skill automatically detects that this is a fresh project and enters **Init Mode**:
+Open Claude Code and run `/init` with a brief description of your idea:
 
 ```
-/requirements I want to build a project management tool for small teams
+/init I want to build a project management tool for small teams
 where users can create projects, assign tasks, and track progress.
 ```
 
-The skill will:
-1. Ask interactive questions to clarify your vision, target users, and MVP scope
-2. Create your **Product Requirements Document** (`docs/PRD.md`)
-3. Break the project into individual features (Single Responsibility)
-4. Create all **feature specs** (`features/PROJ-1.md`, `PROJ-2.md`, etc.)
-5. Update **feature tracking** (`features/INDEX.md`)
-6. Recommend which feature to build first
+The skill interviews you one question at a time (**Grill Me** principle — always with a recommended answer you just confirm or correct) until there's a shared understanding. It then:
+1. Creates your **Product Requirements Document** (`docs/PRD.md`)
+2. Breaks the project into a prioritized feature map (P0/P1/P2)
+3. Updates **feature tracking** (`features/INDEX.md`)
+4. Recommends which feature to build first
 
-You don't need to put everything in the first prompt - a brief description is enough. The skill asks follow-up questions interactively.
+### 5. Spec Your First Feature
 
-### 5. Build Features
+After initialization, create a detailed spec for the first feature:
 
-After project initialization, build features one at a time using skills:
+```
+/write-spec PROJ-1
+```
+
+The skill interviews you about this single feature in depth — user stories, edge cases, acceptance criteria. Use `/refine PROJ-X` at any point to revisit and improve an existing spec.
+
+### 6. Build Features
 
 ```
 /architecture    Design the tech approach for features/PROJ-1-user-auth.md
-/design          Create UI/UX design spec for features/PROJ-1-user-auth.md
-/frontend        Build the UI for features/PROJ-1-user-auth.md (following the design spec)
+/frontend        Build the UI for features/PROJ-1-user-auth.md
 /backend         Build the API for features/PROJ-1-user-auth.md
-/qa              Test features/PROJ-1-user-auth.md (including design conformance)
+/qa              Test features/PROJ-1-user-auth.md
 /deploy          Deploy to Vercel
 ```
 
 Each skill suggests the next step when it finishes. Handoffs are always user-initiated.
-
-To add more features later, run `/requirements` again - it detects the existing PRD and adds a single feature.
 
 ---
 
@@ -75,12 +77,13 @@ To add more features later, run `/requirements` again - it detects the existing 
 
 | Skill | Command | What It Does |
 |-------|---------|-------------|
-| Requirements Engineer | `/requirements` | Creates feature specs with user stories, acceptance criteria, edge cases |
+| Project Initializer | `/init` | One-time setup: creates PRD + feature map via Grill Me interview |
+| Feature Spec Writer | `/write-spec` | Creates a full spec for one feature (user stories, AC, edge cases) |
+| Spec Refiner | `/refine PROJ-X` | Reopens an existing spec to improve, extend, or challenge it |
 | Solution Architect | `/architecture` | Designs PM-friendly tech architecture (no code, only high-level design) |
-| UI/UX Designer Specialist | `/design` | Creates conversion-focused, implementation-ready UI/UX design specs aligned with Tailwind and shadcn/ui |
 | Frontend Developer | `/frontend` | Builds UI with React, Tailwind CSS, and shadcn/ui |
 | Backend Developer | `/backend` | Builds APIs, database schemas, RLS policies with Supabase |
-| QA Engineer | `/qa` | Tests features against acceptance criteria + security audit + design conformance |
+| QA Engineer | `/qa` | Tests features against acceptance criteria + security audit |
 | DevOps | `/deploy` | Deploys to Vercel with production-ready checks |
 | Distribution Engineer | `/distribute` | Distributes project to the users/customers via socials, forums, targeted ads, etc. |
 | Help | `/help` | Context-aware guide: shows where you are and what to do next |
@@ -97,14 +100,14 @@ To add more features later, run `/requirements` again - it detects the existing 
 ## Development Workflow
 
 ```
-1. Define       /requirements  -->  Feature spec in features/PROJ-X.md
-2. Architect    /architecture  -->  Tech design added to feature spec
-3. Design       /design        -->  UI/UX design spec added to feature spec
-4. Build        /frontend      -->  UI components implemented from approved design
-                /backend       -->  APIs + database (if needed)
-5. Test         /qa            -->  Test results + design conformance added to feature spec
-6. Ship         /deploy        -->  Deployed to Vercel
-7. Distribute   /distribute    -->  Distribute project to the users/customers
+0. Setup     /init          -->  PRD + feature map (once per project)
+1. Spec      /write-spec      -->  Feature spec in features/PROJ-X.md
+             /refine PROJ-X -->  Revisit and improve an existing spec
+2. Design    /architecture  -->  Tech design added to feature spec
+3. Build     /frontend      -->  UI components implemented
+             /backend       -->  APIs + database (if needed)
+4. Test      /qa            -->  Test results added to feature spec
+5. Ship      /deploy        -->  Deployed to Vercel
 ```
 
 ### Feature Tracking
@@ -149,17 +152,16 @@ ai-coding-starter-kit/
 |   |   +-- backend.md                   RLS, validation, queries
 |   |   +-- security.md                  Secrets, headers, auth
 |   +-- skills/                      <-- Invocable workflows (/command)
-|   |   |   +-- requirements/SKILL.md        /requirements
-|   |   |   +-- architecture/SKILL.md        /architecture
-|   |   |   +-- design/SKILL.md              /design
-|   |   |   +-- frontend/SKILL.md            /frontend (runs as sub-agent)
-|   |   |   +-- backend/SKILL.md             /backend (runs as sub-agent)
-|   |   |   +-- qa/SKILL.md                  /qa (runs as sub-agent)
-|   |   |   +-- deploy/SKILL.md              /deploy
-|   |   |   +-- distribute/SKILL.md          /distribute
-|   |   |   +-- help/SKILL.md                /help
+|   |   +-- init/SKILL.md                /init
+|   |   +-- write-spec/SKILL.md           /write-spec
+|   |   +-- refine/SKILL.md              /refine
+|   |   +-- architecture/SKILL.md        /architecture
+|   |   +-- frontend/SKILL.md            /frontend (runs as sub-agent)
+|   |   +-- backend/SKILL.md             /backend (runs as sub-agent)
+|   |   +-- qa/SKILL.md                  /qa (runs as sub-agent)
+|   |   +-- deploy/SKILL.md              /deploy
+|   |   +-- help/SKILL.md                /help
 |   +-- agents/                      <-- Sub-agent configs
-|       +-- ui-ux-designer.md            UI/UX Specialist model, tools, limits
 |       +-- frontend-dev.md              Model, tools, limits
 |       +-- backend-dev.md
 |       +-- qa-engineer.md
@@ -187,20 +189,13 @@ ai-coding-starter-kit/
 
 ## Getting Started
 
-### 1. Fill Out Your PRD
+### 1. Initialize the Project
 
-Define your product vision in `docs/PRD.md`:
-- What are you building and why?
-- Who are the target users?
-- What features are on the roadmap?
+Run `/init` with a brief description of your idea. The skill interviews you one question at a time and fills out `docs/PRD.md` with your vision, target users, and a prioritized feature map.
 
-### 2. Build Your First Feature
+### 2. Spec Your First Feature
 
-Run `/requirements` with your feature idea. The skill will:
-- Ask interactive questions to clarify requirements
-- Create a feature spec in `features/PROJ-1-name.md`
-- Update `features/INDEX.md` with the new feature
-- Suggest running `/architecture` as the next step
+Run `/write-spec PROJ-1`. The skill interviews you in depth about this single feature and creates a complete spec in `features/PROJ-1-name.md` — user stories, acceptance criteria, edge cases. Then suggest running `/architecture` as the next step.
 
 ### 3. Add shadcn/ui Components (as needed)
 
@@ -228,9 +223,10 @@ Each skill is a structured workflow that the Agent discovers automatically. Skil
 
 | Skill | Execution | Why? |
 |-------|-----------|------|
-| `/requirements` | Inline | Needs live interaction with user |
+| `/init` | Inline | Needs live interview with user |
+| `/write-spec` | Inline | Needs live interview with user |
+| `/refine` | Inline | Needs live interview with user |
 | `/architecture` | Inline | Short output, user reviews in real-time |
-| `/design` | Sub-agent (forked) | Produces detailed design specs with focused UX context |
 | `/frontend` | Sub-agent (forked) | Heavy file editing, lots of output |
 | `/backend` | Sub-agent (forked) | Heavy file editing, SQL, API code |
 | `/qa` | Sub-agent (forked) | Systematic testing, lots of output |
@@ -326,10 +322,13 @@ Standalone guides in `docs/distribution/`:
 ## Scripts
 
 ```bash
-npm run dev        # Development server (localhost:3000)
-npm run build      # Production build
-npm run start      # Production server
-npm run lint       # ESLint
+npm run dev          # Development server (localhost:3000)
+npm run build        # Production build
+npm run start        # Production server
+npm run lint         # ESLint
+npm test             # Vitest: integration tests for API routes
+npm run test:e2e     # Playwright: E2E tests for user flows
+npm run test:all     # Run both test suites
 ```
 
 ---
