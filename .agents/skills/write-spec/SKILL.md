@@ -3,6 +3,7 @@ name: write-spec
 description: Write a full feature spec for a feature. Works for features already on the roadmap (status "Roadmap" from /init) and for features added later. Pass a feature name or PROJ-X ID as argument.
 argument-hint: "feature name or PROJ-X ID"
 user-invocable: true
+model: fable, opus
 ---
 
 # Feature Spec Writer
