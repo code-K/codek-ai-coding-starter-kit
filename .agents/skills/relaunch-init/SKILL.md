@@ -4,7 +4,7 @@ description: Initialize a website-relaunch project from an existing legacy site.
 argument-hint: [URL of the existing website to relaunch]
 user-invocable: true
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch, WebSearch, AskUserQuestion
-model: opus
+model: fable, opus
 ---
 
 # Website Relaunch Initializer
